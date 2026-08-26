@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="フクリパの記事で知った福岡を、実際に訪ね、利用し、買うためのフクリパモール。">
-  <title>フクリパモール｜記事のその先へ</title>
+  <meta name="description" content="フクリパの記事で知った福岡を、実際に読み、訪ね、利用するためのフクリパANNEX。">
+  <title>フクリパANNEX｜記事のその先へ</title>
   <style>
     :root {
       --cyan: #00c7ff;
@@ -48,20 +48,32 @@
       margin: auto;
       padding: 10px 24px;
       display: grid;
-      grid-template-columns: 220px 1fr auto;
+      grid-template-columns: 250px 1fr auto;
       gap: 30px;
       align-items: center;
     }
-    .brand { display: flex; align-items: flex-end; gap: 10px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
     .brand img { width: 142px; height: auto; }
     .annex-mark {
+      position: relative;
       padding-left: 10px;
       border-left: 1px solid #aaa;
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      line-height: 1.2;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      line-height: 1;
+    }
+    .annex-mark::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; background: linear-gradient(135deg,var(--cyan) 50%,var(--yellow) 50%); }
+    .annex-mark::after {
+      content: "ARTICLE TO ACTION";
+      display: block;
+      margin: 5px 0 0 13px;
+      color: #777;
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      white-space: nowrap;
     }
     .global-nav { display: flex; justify-content: center; gap: clamp(14px,2.2vw,34px); }
     .global-nav button {
@@ -185,6 +197,24 @@
     .quick-action small { color: #777; }
     .quick-action h3 { margin: 6px 0; font-size: 16px; line-height: 1.4; }
     .quick-action strong { color: var(--cyan-dark); white-space: nowrap; }
+    .quick-action .member-hint { display: block; margin-top: 7px; color: #176d7c; font-size: 11px; font-weight: 800; }
+
+    .fukuripa-invite {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 34px;
+      padding: 22px 24px;
+      border: 1px solid #bbb;
+      border-left: 5px solid var(--cyan);
+      background: #f5fcfe;
+    }
+    .fukuripa-invite .eyebrow { margin-bottom: 8px; font-size: 11px; }
+    .fukuripa-invite h2 { margin: 0 0 8px; font-size: 20px; }
+    .fukuripa-invite p { margin: 0; color: #555; font-size: 13px; }
+    .fukuripa-invite .primary { display: inline-grid; place-items: center; text-decoration: none; white-space: nowrap; }
+    .fukuripa-invite small { display: block; margin-top: 8px; color: #777; }
 
     .category-strip { display: grid; grid-template-columns: repeat(6,1fr); border: 1px solid #bbb; background: #fff; }
     .category-strip button {
@@ -403,6 +433,7 @@
       .score-board { grid-template-columns: 1fr 1fr; margin-top: -18px; }
       .score-board > div:nth-child(2) { border-right: 0; }
       .score-board > div:last-child { grid-column: 1/-1; border-top: 1px solid #ddd; min-height: 80px; }
+      .fukuripa-invite { grid-template-columns: 1fr; }
       .mall-grid, .market-grid { grid-template-columns: repeat(2,1fr); }
       .sponsor-grid { grid-template-columns: repeat(2,1fr); }
       .sponsor-lead, .sponsor-card { border-bottom: 1px solid #bbb; }
@@ -471,9 +502,9 @@
   <div class="demo-ribbon">商談用コンセプトモック v1.3｜掲載内容・スコア数はサンプルです</div>
   <header class="site-header">
     <div class="header-top">
-      <a class="brand" href="#home" data-route="home" aria-label="フクリパモール ホーム">
+      <a class="brand" href="#home" data-route="home" aria-label="フクリパANNEX ホーム">
         <img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ">
-        <span class="annex-mark">MALL</span>
+        <span class="annex-mark">ANNEX</span>
       </a>
       <nav class="global-nav" aria-label="メインナビゲーション">
         <button data-route="home" class="is-active">ホーム</button>
@@ -523,7 +554,7 @@
           <div class="quick-action-grid">
             <button class="quick-action" data-detail="kisui"><span><small>ランチ利用・来店対象</small><h3>喜水丸でランチ<br>来店チェックイン</h3><small>利用方法を見る →</small></span><strong>+120pt</strong></button>
             <button class="quick-action" data-detail="trad"><span><small>宿泊情報・利用対象</small><h3>ホテルトラッド博多<br>宿泊情報を確認</h3><small>利用方法を見る →</small></span><strong>+100pt</strong></button>
-            <button class="quick-action" data-detail="kisui"><span><small>今すぐ読める</small><h3>メルマガ掲載記事を<br>最後まで読む</h3><small>読了体験を見る →</small></span><strong>+80pt</strong></button>
+            <button class="quick-action" data-detail="kisui"><span><small>今すぐ読める</small><h3>フクリパの対象記事を<br>最後まで読む</h3><small>読了体験を見る →</small><span class="member-hint">メルマガ経由なら最大 +80pt</span></span><strong>+20pt</strong></button>
           </div>
         </section>
       </div>
@@ -532,7 +563,7 @@
         <div class="container">
           <div class="section-head">
             <div><h2 class="section-title">記事の主役に会いに行く<span class="en">MEET THE STORY</span></h2></div>
-            <p class="section-copy">本家フクリパの記事で出会った店や場所が、フクリパモールでは訪問・利用できるパートナーとして並びます。</p>
+            <p class="section-copy">本家フクリパの記事で出会った店や場所が、フクリパANNEXでは訪問・利用できるパートナーとして並びます。</p>
           </div>
           <div class="category-strip" data-category-strip>
             <button class="is-active" data-filter="all">すべて</button><button data-filter="gourmet">グルメ</button><button data-filter="tour">観光・宿泊</button><button data-filter="city">まち・暮らし</button><button data-filter="business">ビジネス</button><button data-filter="group">えんグループ</button>
@@ -544,7 +575,7 @@
 
       <section class="section soft">
         <div class="container">
-          <div class="section-head"><div><h2 class="section-title">読んで、動いて、応援になる<span class="en">HOW FUKURIPA MALL WORKS</span></h2></div></div>
+          <div class="section-head"><div><h2 class="section-title">読んで、動いて、応援になる<span class="en">HOW ANNEX WORKS</span></h2></div></div>
           <div class="journey">
             <article><h3>フクリパで知る</h3><p>記事から福岡の店、人、プロジェクトに出会います。</p></article>
             <article><h3>記事の先を体験する</h3><p>記事の主役の特設ページで、訪問・宿泊・施設利用へ進みます。</p></article>
@@ -556,7 +587,7 @@
 
       <section class="section">
         <div class="container">
-          <div class="section-head"><div><h2 class="section-title">フクリパモールからのお知らせ<span class="en">UPDATES</span></h2></div></div>
+          <div class="section-head"><div><h2 class="section-title">フクリパANNEXからのお知らせ<span class="en">UPDATES</span></h2></div></div>
           <div class="updates">
             <button class="update-card" data-detail="kisui"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg" alt="喜水丸"><div><time>2026.07.30</time><h3>喜水丸 今泉店の来店チェックインを開始</h3><p>記事で見たお店への訪問が応援スコアになります。</p></div></button>
             <button class="update-card" data-detail="yadore"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/03/49863-8-a0ed29d6cc20f0402cca76c056ddd66f-1005x635-1.png" alt="YADO/Re"><div><time>2026.07.28</time><h3>YADO/Re 会員向け宿泊情報を公開</h3><p>施設利用や新しいスコア特典を、活動報告でお知らせします。</p></div></button>
@@ -566,18 +597,19 @@
     </div>
 
     <div class="view" data-view="mall">
-      <header class="page-hero"><div class="container"><p class="eyebrow">EXPERIENCE MALL</p><h1>福岡の体験を見つける</h1><p>記事で知った店、ホテル、施設、プロジェクト。気になる主役のページから、あなたに合った関わり方を選べます。</p></div></header>
+      <header class="page-hero"><div class="container"><p class="eyebrow">EXPERIENCE ANNEX</p><h1>福岡の体験を見つける</h1><p>記事で知った店、ホテル、施設、プロジェクト。気になる主役のページから、あなたに合った関わり方を選べます。</p></div></header>
       <section class="section"><div class="container"><div class="category-strip" data-category-strip><button class="is-active" data-filter="all">すべて</button><button data-filter="gourmet">グルメ</button><button data-filter="tour">観光・宿泊</button><button data-filter="city">まち・暮らし</button><button data-filter="business">ビジネス</button><button data-filter="group">えんグループ</button></div><div class="mall-grid" data-partner-grid></div></div></section>
     </div>
 
     <div class="view" data-view="profile">
-      <header class="page-hero"><div class="container"><p class="eyebrow">MY FUKURIPA MALL</p><h1>マイページ</h1><p>記事読了、来店、宿泊・施設利用で積み上げた福岡への応援を振り返れます。</p></div></header>
+      <header class="page-hero"><div class="container"><p class="eyebrow">MY FUKURIPA ANNEX</p><h1>マイページ</h1><p>記事読了、来店、宿泊・施設利用で積み上げた福岡への応援を振り返れます。</p></div></header>
       <section class="section"><div class="container profile-layout">
-        <article class="member-card"><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">MALL</span></div><p class="score-label">MEMBER</p><h2>福岡 めぐる さん</h2><p class="big-score"><span data-score>1,260</span><span> pt</span></p><p data-member-rank>ランク2｜称号：福岡まち歩き編集員</p><div class="member-card-footer"><p class="member-id">FLM-2026-0713<br>FUKURIPA MALL DEMO PASS</p><div class="member-qr" aria-label="仮QRコード"><div class="member-qr-grid"></div></div></div></article>
+        <article class="member-card"><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">ANNEX</span></div><p class="score-label">ANNEX PASS</p><h2>福岡 めぐる さん</h2><p class="big-score"><span data-score>1,260</span><span> pt</span></p><p data-member-rank>ランク2｜称号：福岡まち歩き編集員</p><div class="member-card-footer"><p class="member-id">FLA-2026-0713<br>ANNEX DEMO PASS</p><div class="member-qr" aria-label="仮QRコード"><div class="member-qr-grid"></div></div></div></article>
         <div class="profile-content">
+          <aside class="fukuripa-invite" aria-label="フクリパ会員のご案内"><div><p class="eyebrow">FUKURIPA MEMBER BENEFIT</p><h2>フクリパ会員になると、記事体験がもっと深まります</h2><p>会員向けメルマガから対象記事を読むと、通常より多くの応援スコアを受け取れます。</p><small>通常読了 +20pt｜メルマガ経由 最大 +80pt　※対象記事・獲得条件はメルマガでお知らせします。</small></div><a class="primary" href="https://member.fukuoka-leapup.jp/member/email/index" target="_blank" rel="noopener noreferrer">フクリパ無料会員になる</a></aside>
           <section><div class="benefit-summary"><div><h2 class="section-title" style="font-size:26px">ランク特典<span class="en">RANK BENEFITS</span></h2><p>累計スコアでランクが上がります。スコアは消費されません。</p></div><strong data-current-rank>現在：ランク2</strong></div><div class="benefit-grid">
             <article class="benefit-card"><span class="benefit-state">ランク1</span><h3>福岡ビギナー</h3><p>記事読了・来店・施設利用の履歴をマイページで確認できます。</p><strong>称号・バッジ付与</strong></article>
-            <article class="benefit-card is-available" data-rank-two><span class="benefit-state" data-rank-two-state>現在のランク</span><h3>福岡まち歩き<br>編集員</h3><p>フクリパモールの会員向け企画や限定情報をご案内します。</p><strong>累計1,200pt到達</strong></article>
+            <article class="benefit-card is-available" data-rank-two><span class="benefit-state" data-rank-two-state>現在のランク</span><h3>福岡まち歩き<br>編集員</h3><p>フクリパANNEXの会員向け企画や限定情報をご案内します。</p><strong>累計1,200pt到達</strong></article>
             <article class="benefit-card is-locked" data-rank-three><span class="benefit-state" data-rank-state>あと240pt</span><h3>福岡アンバサダー</h3><p>会員限定ホテルプランや、新店舗・イベントの先行情報をご案内します。</p><strong>累計1,500ptでランクアップ</strong></article>
           </div><article class="member-access" data-member-access><div class="member-access-head"><div><span class="benefit-state" data-access-state>LOCKED</span><h3>会員限定ホテル予約</h3><p data-access-copy>ランク3到達で、会員限定料金の予約ページが開きます。</p></div><strong><span data-access-remaining>240</span>pt</strong></div><button class="secondary" data-open-booking disabled>ランク3で解放</button><p class="access-note">対象会員ご本人のみ利用できます。限定URLの転載・共有はご遠慮ください。</p></article></section>
           <section><h2 class="section-title" style="font-size:26px">応援の履歴<span class="en">SUPPORT HISTORY</span></h2><div class="history" data-history></div></section>
@@ -586,7 +618,7 @@
     </div>
 
     <div class="view" data-view="detail">
-      <section class="detail-hero" data-detail-hero><div class="detail-hero-content"><button class="back-button" data-route="mall">← 体験モールへ戻る</button><p class="eyebrow" style="margin-top:24px;color:#fff">FUKURIPA FEATURED PARTNER</p><h1 data-detail-name></h1><p data-detail-lead></p><div class="detail-badges" data-detail-badges></div></div></section>
+      <section class="detail-hero" data-detail-hero><div class="detail-hero-content"><button class="back-button" data-route="mall">← 体験先一覧へ戻る</button><p class="eyebrow" style="margin-top:24px;color:#fff">FUKURIPA FEATURED PARTNER</p><h1 data-detail-name></h1><p data-detail-lead></p><div class="detail-badges" data-detail-badges></div></div></section>
       <section class="section"><div class="container detail-layout">
         <div class="detail-main">
           <nav class="detail-nav" style="grid-template-columns:repeat(3,1fr)"><button class="is-active" data-detail-tab="experience">体験する</button><button data-detail-tab="activity">活動報告</button><button data-detail-tab="articles">記事を読む</button></nav>
@@ -603,7 +635,7 @@
     </div>
   </main>
 
-  <footer><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">MALL</span></div><nav><a href="https://fukuoka-leapup.jp/" target="_blank" rel="noopener">フクリパ本館</a><a href="#home" data-route="home">モールトップ</a><a href="#mall" data-route="mall">体験を見つける</a><a href="#profile" data-route="profile">マイページ</a></nav><p>Concept mock for business discussion. © フクリパモール</p></footer>
+  <footer><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">ANNEX</span></div><nav><a href="https://fukuoka-leapup.jp/" target="_blank" rel="noopener">フクリパ本館</a><a href="#home" data-route="home">ANNEXトップ</a><a href="#mall" data-route="mall">体験を見つける</a><a href="#profile" data-route="profile">マイページ</a></nav><p>Concept mock for business discussion. © フクリパANNEX</p></footer>
 
   <nav class="bottom-nav" aria-label="モバイルナビゲーション"><button data-route="home" class="is-active"><span>⌂</span>ホーム</button><button data-route="mall"><span>⌕</span>見つける</button><button data-route="profile"><span>●</span>マイページ</button></nav>
   <div class="toast" role="status" aria-live="polite"></div>
@@ -622,10 +654,11 @@
     let currentPartner = partners[0];
     let pendingEarn = null;
     const histories = [
-      {date:'2026.07.28',title:'メルマガ掲載記事を読了',source:'フクリパ',point:420},
+      {date:'2026.07.28',title:'メルマガ掲載記事を読了',source:'フクリパ会員向けボーナス',point:80},
       {date:'2026.07.26',title:'イベント参加を確認',source:'OHASHI HILL',point:200},
       {date:'2026.07.20',title:'ホテルの宿泊利用を確認',source:'ホテルトラッド博多',point:520},
-      {date:'2026.07.13',title:'来店チェックイン',source:'喜水丸 今泉店',point:120}
+      {date:'2026.07.13',title:'最初の応援アクション',source:'喜水丸 今泉店・初回記録',point:50},
+      {date:'2026.07.12',title:'ANNEXをはじめる',source:'ウェルカムスコア',point:100}
     ];
 
     const yen = n => Number(n).toLocaleString('ja-JP');
@@ -657,15 +690,15 @@
 
     function experiences(p) {
       const base = p.id==='kisui' ? [
-        {type:'read',title:'メルマガ掲載記事を最後まで読む',copy:'記事読了をデモ体験し、福岡を知った行動を記録します。',point:80,action:'記事読了を体験'},
+        {type:'read',title:'フクリパの対象記事を最後まで読む',copy:'通常の読了は20pt。会員向けメルマガ経由では最大80ptを記録します。',point:20,action:'記事読了を体験'},
         {type:'visit',title:'今泉店でチェックイン',copy:'店頭で会員証を提示。記事を読んで訪れた体験を記録します。',point:120,action:'利用を確認する'},
         {type:'activity',title:'喜水丸の活動報告を見る',copy:'店舗からの最新情報を確認できます。',action:'活動報告を見る',tab:'activity'}
       ] : p.id==='trad' ? [
-        {type:'read',title:'ホテルの記事・宿泊情報を確認',copy:'メルマガから届いた記事と宿泊情報を確認します。',point:100,action:'情報確認を体験'},
+        {type:'read',title:'ホテルの記事・宿泊情報を確認',copy:'対象記事を読み、宿泊前に福岡を知った行動を記録します。',point:20,action:'情報確認を体験'},
         {type:'visit',title:'ホテルの宿泊利用を確認',copy:'チェックイン後の利用確認で、福岡滞在を記録します。',point:180,action:'宿泊利用を体験'},
         {type:'activity',title:'ホテルからのお知らせを見る',copy:'施設からの最新情報を確認できます。',action:'活動報告を見る',tab:'activity'}
       ] : [
-        {type:'read',title:'メルマガ掲載記事を最後まで読む',copy:'記事読了をデモ体験し、福岡を知った行動を記録します。',point:80,action:'記事読了を体験'},
+        {type:'read',title:'フクリパの対象記事を最後まで読む',copy:'通常の読了は20pt。会員向けメルマガ経由では最大80ptを記録します。',point:20,action:'記事読了を体験'},
         {type:'visit',title:`${p.name}のサービスを利用`,copy:'参画事業者の利用確認で、記事のその先の体験を記録します。',point:120,action:'サービス利用を体験'},
         {type:'activity',title:'最新の活動報告を見る',copy:'事業者からの新着情報です。',action:'活動報告を見る',tab:'activity'}
       ];
@@ -679,7 +712,7 @@
         {label:'お知らせ',date:'2026.07.27',title:'週末も揚げたてでお待ちしています',copy:'フクリパの記事で紹介された明太子・いか明太・高菜もご用意しています。',likes:57}
       ] : [
         {label:'利用案内',date:'2026.07.31',title:`${p.name}の会員向け体験をご案内しています`,copy:'施設・サービスの利用確認後、応援スコアが加算されます。',likes:48},
-        {label:'お知らせ',date:'2026.07.29',title:'フクリパモール会員向け企画を準備中です',copy:'体験の案内や新しいスコア特典を、活動報告で順次お届けします。',likes:72},
+        {label:'お知らせ',date:'2026.07.29',title:'フクリパANNEX会員向け企画を準備中です',copy:'体験の案内や新しいスコア特典を、活動報告で順次お届けします。',likes:72},
         {label:'お知らせ',date:'2026.07.26',title:`${p.name}からのお知らせ`,copy:'フクリパの記事の続きを体験できる企画をお届けします。',likes:35}
       ];
       return posts.map((post,index)=>{ const key=`${p.id}-${index}`; const liked=activityLikes[key]; return `<article class="activity-post"><div class="activity-head"><div><span class="activity-label">${post.label}</span><time>${post.date}</time><h3>${post.title}</h3></div><button class="like-button ${liked?'is-liked':''}" data-like="${key}" data-like-base="${post.likes}" aria-pressed="${liked?'true':'false'}">♡ <span>${post.likes+(liked?1:0)}</span></button></div><p>${post.copy}</p></article>`; }).join('');
