@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="フクリパの記事で知った福岡を、実際に体験し、応援するための別館。">
+  <title>フクリパANNEX｜記事のその先へ</title>
+  <style>
+    :root {
+      --cyan: #00c7ff;
+      --cyan-dark: #009bc8;
+      --yellow: #fff001;
+      --ink: #171717;
+      --muted: #777;
+      --line: #d9d9d9;
+      --soft: #f4f7f8;
+      --white: #fff;
+      --shadow: 0 12px 35px rgba(20, 40, 50, .09);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+      line-height: 1.65;
+    }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.97);
+      box-shadow: 0 3px 8px rgba(0,0,0,.06);
+      backdrop-filter: blur(12px);
+    }
+    .header-top {
+      max-width: 1180px;
+      min-height: 76px;
+      margin: auto;
+      padding: 10px 24px;
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      gap: 30px;
+      align-items: center;
+    }
+    .brand { display: flex; align-items: flex-end; gap: 10px; }
+    .brand img { width: 142px; height: auto; }
+    .annex-mark {
+      padding-left: 10px;
+      border-left: 1px solid #aaa;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      line-height: 1.2;
+    }
+    .global-nav { display: flex; justify-content: center; gap: clamp(14px,2.2vw,34px); }
+    .global-nav button {
+      border: 0;
+      background: none;
+      padding: 10px 0 7px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+    .global-nav button:hover, .global-nav button.is-active { border-color: var(--cyan); }
+    .header-actions { display: flex; gap: 10px; align-items: center; }
+    .score-pill {
+      border: 1px solid #d7d7d7;
+      background: #fff;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .score-pill small { display: block; color: var(--muted); font-size: 10px; line-height: 1; font-weight: 500; }
+    .score-pill strong { color: var(--cyan-dark); }
+    .member-button {
+      border: 0;
+      border-radius: 8px;
+      background: var(--yellow);
+      padding: 11px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .demo-ribbon { background: #111; color: #fff; text-align: center; padding: 3px 12px; font-size: 11px; letter-spacing: .08em; }
+
+    main { min-height: 70vh; }
+    .view { display: none; }
+    .view.is-active { display: block; animation: appear .24s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(4px); } }
+    .container { width: min(1180px, calc(100% - 40px)); margin: auto; }
+    .section { padding: 58px 0; }
+    .section.soft { background: var(--soft); }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .section-title { margin: 0; font-size: clamp(24px,3vw,38px); line-height: 1.25; }
+    .section-title .en { display: block; margin-top: 4px; color: #999; font-family: Arial,sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .16em; }
+    .section-copy { margin: 0; color: #666; max-width: 540px; }
+    .text-link { border: 0; background: none; cursor: pointer; font-weight: 800; border-bottom: 2px solid var(--cyan); padding: 3px 0; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: #f2f5f6;
+      min-height: 480px;
+      display: grid;
+      align-items: center;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 0 48%;
+      background:
+        linear-gradient(90deg, #f2f5f6 0%, rgba(242,245,246,.18) 35%, rgba(242,245,246,.06)),
+        url("https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg") center/cover;
+    }
+    .hero-content { position: relative; z-index: 2; width: min(1180px, calc(100% - 40px)); margin: auto; }
+    .hero-copy { width: min(690px, 57%); padding: 60px 0; }
+    .eyebrow { margin: 0 0 16px; color: var(--cyan-dark); font-weight: 800; letter-spacing: .14em; font-size: 13px; }
+    .hero h1 { margin: 0; font-size: clamp(38px,4.35vw,62px); line-height: 1.14; letter-spacing: .04em; }
+    .hero h1 em { color: var(--cyan-dark); font-style: normal; }
+    .hero-lead { max-width: 520px; margin: 22px 0 0; font-size: 17px; font-weight: 600; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .primary, .secondary, .ghost {
+      min-height: 48px;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .primary { border: 2px solid #111; background: #111; color: #fff; }
+    .primary:hover { border-color: var(--cyan-dark); background: var(--cyan-dark); }
+    .secondary { border: 2px solid #111; background: #fff; }
+    .secondary:hover { color: var(--cyan-dark); border-color: var(--cyan-dark); }
+    .ghost { border: 1px solid #bbb; background: #fff; }
+    .continuity-note { display: inline-flex; align-items: center; gap: 8px; max-width: 520px; margin-top: 22px; font-size: 14px; color: #555; font-weight: 700; }
+    .continuity-note::before { content: "✓"; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--yellow); font-weight: 900; }
+
+    .score-board {
+      margin-top: -36px;
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr .8fr;
+      background: #fff;
+      border: 1px solid #ddd;
+      box-shadow: var(--shadow);
+    }
+    .score-board > div { min-height: 122px; padding: 22px 28px; border-right: 1px solid #ddd; }
+    .score-board > div:last-child { border: 0; }
+    .score-label { margin: 0; font-size: 12px; color: #666; }
+    .score-value { margin: 2px 0 0; font: 900 38px/1 Arial,sans-serif; }
+    .score-value span { color: var(--cyan-dark); font-size: 16px; }
+    .rank-line { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; font-weight: 700; }
+    .progress { height: 9px; overflow: hidden; background: #e8e8e8; margin: 14px 0 8px; }
+    .progress span { display: block; width: 63%; height: 100%; background: var(--cyan); }
+    .board-action { height: 100%; display: grid; place-items: center; text-align: center; }
+    .board-action button { width: 100%; }
+
+    .category-strip { display: grid; grid-template-columns: repeat(6,1fr); border: 1px solid #bbb; background: #fff; }
+    .category-strip button {
+      min-height: 70px;
+      border: 0;
+      border-right: 1px solid #bbb;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .category-strip button:last-child { border: 0; }
+    .category-strip button:hover, .category-strip button.is-active { background: #f0fbfe; box-shadow: inset 0 -4px var(--cyan); }
+
+    .mall-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid #bbb; border-left: 1px solid #bbb; }
+    .partner-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      border-right: 1px solid #bbb;
+      border-bottom: 1px solid #bbb;
+      background: #fff;
+      padding: 18px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .partner-card:hover { opacity: .86; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); z-index: 1; }
+    .partner-card figure { margin: 0; position: relative; aspect-ratio: 1.9/1; overflow: hidden; background: #ddd; }
+    .partner-card figure img { height: 100%; object-fit: cover; }
+    .status-chip { position: absolute; left: 0; top: 0; background: var(--cyan); color: #fff; padding: 5px 9px; font-size: 11px; font-weight: 800; }
+    .partner-card h3 { margin: 12px 0 4px; font-size: 18px; line-height: 1.45; }
+    .card-tag { width: max-content; margin: 0; border-bottom: 2px solid var(--cyan); font-size: 12px; font-weight: 800; }
+    .card-desc { margin: 10px 0; color: #777; font-size: 13px; }
+    .card-meta { margin-top: auto; padding-top: 12px; display: flex; justify-content: space-between; color: #999; font-size: 11px; }
+    .card-meta strong { color: var(--cyan-dark); }
+
+    .journey { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; counter-reset: step; }
+    .journey article { position: relative; border-top: 4px solid var(--cyan); background: #fff; padding: 24px 20px; box-shadow: 0 5px 20px rgba(0,0,0,.05); }
+    .journey article::before { counter-increment: step; content: "0" counter(step); display: block; color: #ccc; font: 900 28px/1 Arial,sans-serif; }
+    .journey h3 { margin: 12px 0 5px; font-size: 17px; }
+    .journey p { margin: 0; color: #666; font-size: 13px; }
+
+    .updates { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .update-card { display: grid; grid-template-columns: 150px 1fr; border: 1px solid #bbb; background: #fff; min-height: 120px; cursor: pointer; }
+    .update-card img { height: 100%; object-fit: cover; }
+    .update-card div { padding: 16px; }
+    .update-card time { color: #999; font-size: 11px; }
+    .update-card h3 { margin: 4px 0; font-size: 15px; }
+    .update-card p { margin: 0; color: #666; font-size: 12px; }
+    .sponsor-strip { border-top: 1px solid #bbb; border-bottom: 1px solid #bbb; background: #fff; }
+    .sponsor-grid { display: grid; grid-template-columns: 1.05fr repeat(3,1fr); }
+    .sponsor-lead, .sponsor-card { min-height: 150px; padding: 22px; border-right: 1px solid #bbb; }
+    .sponsor-card:last-child { border-right: 0; }
+    .sponsor-lead { background: var(--soft); }
+    .sponsor-label { margin: 0 0 8px; color: var(--cyan-dark); font: 900 11px/1 Arial,sans-serif; letter-spacing: .16em; }
+    .sponsor-lead h2, .sponsor-card h3 { margin: 0; line-height: 1.35; }
+    .sponsor-lead h2 { font-size: 24px; }
+    .sponsor-card h3 { font-size: 17px; }
+    .sponsor-lead p, .sponsor-card p { margin: 10px 0 0; color: #666; font-size: 13px; }
+    .sponsor-card strong { display: block; margin-top: 14px; color: var(--cyan-dark); font-size: 12px; }
+
+    .page-hero { padding: 46px 0 30px; background: var(--soft); border-bottom: 1px solid #ddd; }
+    .page-hero h1 { margin: 0; font-size: clamp(30px,4vw,50px); }
+    .page-hero p { max-width: 650px; margin: 12px 0 0; color: #666; }
+    .market-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .product-card { border: 1px solid #bbb; background: #fff; }
+    .product-card .product-image { aspect-ratio: 1.4; overflow: hidden; background: #eee; }
+    .product-card img { height: 100%; object-fit: cover; }
+    .product-card > div:last-child { padding: 18px; }
+    .product-card h3 { margin: 0 0 7px; line-height: 1.45; }
+    .price { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 0; font-weight: 800; }
+    .price small { color: var(--cyan-dark); }
+    .funding-status { display: inline-flex; margin: 10px 0 0; padding: 3px 8px; background: var(--yellow); font-size: 10px; font-weight: 900; letter-spacing: .08em; }
+    .funding-total { margin: 14px 0 0; font: 900 25px/1.2 Arial,sans-serif; }
+    .funding-total small { margin-left: 5px; color: #777; font: 500 11px/1.2 sans-serif; }
+    .funding-progress { height: 8px; margin: 10px 0 7px; overflow: hidden; background: #e8e8e8; }
+    .funding-progress span { display: block; height: 100%; background: var(--cyan); }
+    .funding-meta { display: flex; justify-content: space-between; gap: 8px; color: #777; font-size: 11px; }
+    .product-card button { width: 100%; margin-top: 14px; }
+
+    .profile-layout { display: grid; grid-template-columns: 360px 1fr; gap: 28px; align-items: start; }
+    .profile-content { display: grid; gap: 42px; min-width: 0; }
+    .member-card { position: sticky; top: 120px; overflow: hidden; color: #111; background: linear-gradient(135deg,#dff8ff,#fff 42%,#fff8a4); border: 1px solid #ccc; padding: 26px; box-shadow: var(--shadow); }
+    .member-card .brand { margin-bottom: 38px; }
+    .member-card h2 { margin: 0; font-size: 22px; }
+    .member-card .big-score { margin: 8px 0 0; font: 900 42px/1 Arial,sans-serif; }
+    .member-card .big-score span { font-size: 14px; }
+    .member-card .member-id { margin: 30px 0 0; font: 12px/1.4 monospace; color: #555; }
+    .member-card-footer { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin-top: 34px; }
+    .member-qr { width: 86px; aspect-ratio: 1; padding: 7px; background: #fff; border: 1px solid #111; }
+    .member-qr-grid {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(90deg,#111 8px,transparent 8px 14px,#111 14px 22px,transparent 22px 30px,#111 30px 38px,transparent 38px 46px,#111 46px 54px,transparent 54px 62px,#111 62px 70px),
+        linear-gradient(#111 8px,transparent 8px 14px,#111 14px 22px,transparent 22px 30px,#111 30px 38px,transparent 38px 46px,#111 46px 54px,transparent 54px 62px,#111 62px 70px);
+      background-blend-mode: multiply;
+      opacity: .9;
+    }
+    .member-qr-grid::before,
+    .member-qr-grid::after { content: ""; position: absolute; width: 18px; height: 18px; background: #fff; border: 6px solid #111; }
+    .member-qr-grid::before { left: 0; top: 0; }
+    .member-qr-grid::after { right: 0; bottom: 0; }
+    .history { border-top: 1px solid #bbb; }
+    .history-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 18px 0; border-bottom: 1px solid #bbb; }
+    .history-row p { margin: 0; }
+    .history-row small { color: #888; }
+    .history-row strong { color: var(--cyan-dark); }
+    .benefit-summary { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 16px; }
+    .benefit-summary p { margin: 0; color: #666; font-size: 13px; }
+    .benefit-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .benefit-card { position: relative; min-height: 190px; padding: 20px; border: 1px solid #bbb; background: #fff; }
+    .benefit-card.is-available { border: 2px solid var(--cyan); background: linear-gradient(145deg,#f2fcff,#fff); }
+    .benefit-card.is-locked { color: #777; background: #f4f4f4; }
+    .benefit-state { display: inline-flex; padding: 3px 8px; background: #111; color: #fff; font-size: 10px; font-weight: 900; }
+    .benefit-card.is-available .benefit-state { background: var(--cyan-dark); }
+    .benefit-card.is-locked .benefit-state { background: #aaa; }
+    .benefit-card h3 { margin: 14px 0 6px; font-size: 17px; line-height: 1.4; }
+    .benefit-card p { margin: 0; font-size: 12px; }
+    .benefit-card strong { display: block; margin-top: 16px; font-size: 13px; }
+
+    .detail-hero { position: relative; min-height: 460px; display: grid; align-items: end; overflow: hidden; background: #222; }
+    .detail-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.06) 70%), var(--detail-image) center/cover; }
+    .detail-hero-content { position: relative; z-index: 1; width: min(1180px,calc(100% - 40px)); margin: auto; padding: 80px 0 42px; color: #fff; }
+    .back-button { border: 1px solid rgba(255,255,255,.7); background: rgba(0,0,0,.24); color: #fff; padding: 8px 12px; cursor: pointer; }
+    .detail-hero h1 { max-width: 820px; margin: 18px 0 8px; font-size: clamp(32px,5vw,60px); line-height: 1.15; }
+    .detail-hero p { margin: 0; }
+    .detail-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .detail-badges span { border: 1px solid rgba(255,255,255,.65); padding: 5px 10px; font-size: 12px; }
+    .detail-layout { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: 32px; align-items: start; }
+    .detail-main { min-width: 0; }
+    .detail-nav { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid #bbb; margin-bottom: 28px; }
+    .detail-nav button { border: 0; border-right: 1px solid #bbb; background: #fff; padding: 16px 8px; cursor: pointer; font-weight: 800; }
+    .detail-nav button:last-child { border: 0; }
+    .detail-nav button.is-active { background: #eefbff; box-shadow: inset 0 -4px var(--cyan); }
+    .detail-panel { display: none; }
+    .detail-panel.is-active { display: block; }
+    .experience-list { display: grid; gap: 14px; }
+    .experience-card { border: 1px solid #bbb; display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 16px; padding: 16px; }
+    .experience-icon { width: 72px; height: 72px; display: grid; place-items: center; background: var(--soft); font-size: 30px; }
+    .experience-card h3, .experience-card p { margin: 0; }
+    .experience-card p { color: #777; font-size: 13px; }
+    .point-label { color: var(--cyan-dark); font-weight: 900; white-space: nowrap; }
+    .experience-card button { margin-top: 8px; padding: 8px 14px; }
+    .activity-feed { border-top: 1px solid #bbb; }
+    .activity-post { border-bottom: 1px solid #bbb; padding: 22px 0; }
+    .activity-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .activity-label { display: inline-flex; margin: 0 0 8px; padding: 3px 7px; background: var(--soft); color: var(--cyan-dark); font-size: 10px; font-weight: 900; }
+    .activity-post h3 { margin: 0; font-size: 17px; }
+    .activity-post p { margin: 9px 0; color: #555; }
+    .activity-post time { color: #888; font-size: 11px; }
+    .like-button { min-width: 74px; border: 1px solid #bbb; border-radius: 999px; background: #fff; padding: 7px 10px; cursor: pointer; font-size: 12px; font-weight: 800; }
+    .like-button.is-liked { border-color: var(--cyan-dark); color: var(--cyan-dark); background: #effbff; }
+    .article-archive { display: grid; gap: 14px; }
+    .article-cta {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      border: 3px solid var(--cyan);
+      background: #fff;
+      transition: .2s;
+    }
+    .article-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .article-cta img { height: 100%; min-height: 130px; object-fit: cover; }
+    .article-cta div { padding: 18px; }
+    .article-cta .source { margin: 0 0 6px; color: var(--cyan-dark); font-size: 11px; font-weight: 900; letter-spacing: .12em; }
+    .article-cta h3 { margin: 0; font-size: 17px; }
+    .article-cta .read { margin: 12px 0 0; font-weight: 800; }
+    .detail-side { position: sticky; top: 110px; display: grid; gap: 18px; }
+    .side-score { border: 1px solid #bbb; padding: 22px; }
+    .side-score h2 { margin: 0; font-size: 15px; }
+    .side-score .score-value { margin: 8px 0 14px; }
+    .side-score button { width: 100%; }
+    .side-note { background: var(--soft); padding: 18px; font-size: 12px; }
+    .side-sponsor { border: 1px solid #bbb; padding: 18px; background: #fffef0; font-size: 12px; }
+    .side-sponsor h3 { margin: 4px 0 8px; font-size: 16px; }
+    .side-sponsor p { margin: 0 0 12px; color: #666; }
+    .side-sponsor a { display: inline-block; font-weight: 900; border-bottom: 2px solid var(--cyan); }
+
+    .toast { position: fixed; left: 50%; bottom: 86px; z-index: 100; transform: translate(-50%,20px); opacity: 0; pointer-events: none; background: #111; color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 800; transition: .25s; }
+    .toast.is-visible { opacity: 1; transform: translate(-50%,0); }
+    .modal { position: fixed; inset: 0; z-index: 90; display: none; place-items: center; background: rgba(0,0,0,.54); padding: 20px; }
+    .modal.is-open { display: grid; }
+    .modal-card { width: min(460px,100%); background: #fff; padding: 28px; box-shadow: 0 25px 80px rgba(0,0,0,.3); }
+    .modal-card h2 { margin: 0 0 10px; }
+    .modal-card p { color: #666; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+
+    footer { border-top: 1px solid #ccc; padding: 42px 20px 90px; text-align: center; background: #fff; }
+    footer .brand { justify-content: center; align-items: flex-end; }
+    footer nav { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 24px; color: #666; font-size: 12px; }
+    footer p { margin-top: 25px; color: #888; font-size: 11px; }
+    .bottom-nav { display: none; }
+
+    @media (max-width: 900px) {
+      .header-top { grid-template-columns: 1fr auto; min-height: 68px; padding: 9px 18px; }
+      .global-nav { display: none; }
+      .brand img { width: 116px; }
+      .header-actions .member-button { display: none; }
+      .hero { min-height: 620px; align-items: start; }
+      .hero::after { inset: 0 0 40% 0; background: linear-gradient(0deg,#f2f5f6 0%,rgba(242,245,246,0) 50%), url("https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg") center/cover; }
+      .hero-copy { width: 100%; padding: 330px 0 42px; }
+      .hero h1 { font-size: clamp(37px,10vw,58px); }
+      .score-board { grid-template-columns: 1fr 1fr; margin-top: -18px; }
+      .score-board > div:nth-child(2) { border-right: 0; }
+      .score-board > div:last-child { grid-column: 1/-1; border-top: 1px solid #ddd; min-height: 80px; }
+      .mall-grid, .market-grid { grid-template-columns: repeat(2,1fr); }
+      .sponsor-grid { grid-template-columns: repeat(2,1fr); }
+      .sponsor-lead, .sponsor-card { border-bottom: 1px solid #bbb; }
+      .sponsor-card:nth-child(2n) { border-right: 0; }
+      .journey { grid-template-columns: repeat(2,1fr); }
+      .category-strip { grid-template-columns: repeat(3,1fr); }
+      .category-strip button:nth-child(3) { border-right: 0; }
+      .category-strip button:nth-child(-n+3) { border-bottom: 1px solid #bbb; }
+      .detail-layout, .profile-layout { grid-template-columns: 1fr; }
+      .detail-side, .member-card { position: static; }
+      .benefit-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      body { padding-bottom: 66px; }
+      .container, .hero-content, .detail-hero-content { width: min(100% - 28px,1180px); }
+      .annex-mark { font-size: 10px; }
+      .score-pill { padding: 6px 8px; font-size: 12px; }
+      .hero { min-height: 610px; }
+      .hero-copy { padding-top: 305px; }
+      .hero-lead { font-size: 14px; }
+      .hero-actions .primary, .hero-actions .secondary { flex: 1; padding-inline: 10px; font-size: 13px; }
+      .section { padding: 42px 0; }
+      .section-head { display: block; }
+      .section-copy { margin-top: 10px; font-size: 13px; }
+      .score-board { display: block; }
+      .score-board > div { min-height: auto; border: 0; border-bottom: 1px solid #ddd; }
+      .score-board > div:last-child { border: 0; }
+      .mall-grid, .market-grid { grid-template-columns: 1fr 1fr; }
+      .partner-card { padding: 10px; }
+      .partner-card h3 { font-size: 14px; }
+      .card-desc { display: none; }
+      .card-meta { display: block; }
+      .card-meta span { display: block; }
+      .journey { grid-template-columns: 1fr; }
+      .updates { grid-template-columns: 1fr; }
+      .update-card { grid-template-columns: 110px 1fr; }
+      .sponsor-grid { grid-template-columns: 1fr; }
+      .sponsor-lead, .sponsor-card { min-height: auto; border-right: 0; }
+      .market-grid { gap: 10px; }
+      .product-card > div:last-child { padding: 12px; }
+      .product-card h3 { font-size: 14px; }
+      .funding-total { font-size: 20px; }
+      .funding-meta { display: grid; }
+      .benefit-grid { grid-template-columns: 1fr; }
+      .detail-hero { min-height: 420px; }
+      .detail-nav { overflow-x: auto; grid-template-columns: repeat(4,minmax(105px,1fr)); }
+      .experience-card { grid-template-columns: 62px 1fr; }
+      .experience-icon { width: 58px; height: 58px; }
+      .experience-card > div:last-child { grid-column: 2; }
+      .article-cta { grid-template-columns: 1fr; }
+      .article-cta img { min-height: 150px; }
+      .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: repeat(4,1fr); background: #fff; border-top: 1px solid #ccc; box-shadow: 0 -5px 20px rgba(0,0,0,.08); }
+      .bottom-nav button { min-height: 64px; border: 0; background: #fff; font-size: 10px; font-weight: 800; cursor: pointer; }
+      .bottom-nav button span { display: block; font-size: 21px; line-height: 1.1; }
+      .bottom-nav button.is-active { color: var(--cyan-dark); box-shadow: inset 0 3px var(--cyan); }
+      footer { padding-bottom: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-ribbon">商談用コンセプトモック v1.1｜掲載内容・ポイント数はサンプルです</div>
+  <header class="site-header">
+    <div class="header-top">
+      <a class="brand" href="#home" data-route="home" aria-label="フクリパANNEX ホーム">
+        <img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ">
+        <span class="annex-mark">ANNEX</span>
+      </a>
+      <nav class="global-nav" aria-label="メインナビゲーション">
+        <button data-route="home" class="is-active">ホーム</button>
+        <button data-route="mall">見つける</button>
+        <button data-route="market">ストア</button>
+        <button data-route="profile">マイページ</button>
+      </nav>
+      <div class="header-actions">
+        <button class="score-pill" data-route="profile"><small>応援スコア</small><strong data-score>1,260</strong> pt</button>
+        <button class="member-button" data-route="profile">会員証</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="view is-active" data-view="home">
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">FUKUOKA LEAP UP &amp; YOU</p>
+            <h1>福岡を<em>体験</em>する。<br>フクリパでつながる。</h1>
+            <p class="hero-lead">フクリパで知った人・店・場所を、訪ねる、買う、語り合う。あなたの行動が福岡と関わる証として積み上がります。</p>
+            <div class="hero-actions">
+              <button class="primary" data-route="mall">体験を見つける</button>
+              <button class="secondary" data-detail="kisui">喜水丸の特設ページへ</button>
+            </div>
+            <p class="continuity-note">利用する、読み返したくなる。フクリパが提案するメディアコマースの未来。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="score-board" aria-label="応援スコア">
+          <div>
+            <p class="score-label">あなたの応援スコア</p>
+            <p class="score-value"><strong data-score>1,260</strong><span> pt</span></p>
+            <p class="score-label">称号：福岡まち歩き編集員</p>
+          </div>
+          <div>
+            <div class="rank-line"><span>次の称号「福岡アンバサダー」</span><span><b data-remaining>740</b> pt</span></div>
+            <div class="progress"><span data-progress></span></div>
+            <p class="score-label">記事を読んだその先の体験で、応援がもっと深まります。</p>
+          </div>
+          <div class="board-action"><button class="secondary" data-route="profile">履歴・会員証を見る</button></div>
+        </section>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div><h2 class="section-title">記事の主役に会いに行く<span class="en">MEET THE STORY</span></h2></div>
+            <p class="section-copy">本家フクリパの記事で出会った店や場所が、ANNEXでは体験できるパートナーとして並びます。</p>
+          </div>
+          <div class="category-strip" data-category-strip>
+            <button class="is-active" data-filter="all">すべて</button><button data-filter="gourmet">グルメ</button><button data-filter="tour">観光・宿泊</button><button data-filter="city">まち・暮らし</button><button data-filter="business">ビジネス</button><button data-filter="group">えんグループ</button>
+          </div>
+          <div class="mall-grid" data-partner-grid></div>
+          <div style="text-align:center;margin-top:28px"><button class="secondary" data-route="mall">すべての体験先を見る</button></div>
+        </div>
+      </section>
+
+      <section class="sponsor-strip" aria-label="スポンサー枠">
+        <div class="container sponsor-grid">
+          <div class="sponsor-lead"><p class="sponsor-label">SPONSORED EXPERIENCE</p><h2>記事の関心を、広告主の体験へ。</h2><p>掲載事業者やグループ事業のキャンペーンを、ANNEX内の自然な導線として設計できます。</p></div>
+          <article class="sponsor-card"><p class="sponsor-label">HOTEL</p><h3>ホテルトラッド博多 宿泊プラン</h3><p>記事を読んだ読者へ、福岡滞在の提案を届ける協賛枠。</p><strong>広告・送客枠</strong></article>
+          <article class="sponsor-card"><p class="sponsor-label">CITY</p><h3>OHASHI HILL イベント告知</h3><p>地域イベントや施設利用を、体験スコアと接続できます。</p><strong>親会社シナジー枠</strong></article>
+          <article class="sponsor-card"><p class="sponsor-label">PARTNER</p><h3>特集事業者の限定キャンペーン</h3><p>記事掲載後の販促を、ANNEX内で継続的に展開。</p><strong>クライアント枠</strong></article>
+        </div>
+      </section>
+
+      <section class="section soft">
+        <div class="container">
+          <div class="section-head"><div><h2 class="section-title">読んで、動いて、応援になる<span class="en">HOW ANNEX WORKS</span></h2></div></div>
+          <div class="journey">
+            <article><h3>フクリパで知る</h3><p>記事から福岡の店、人、プロジェクトに出会います。</p></article>
+            <article><h3>ANNEXで会う</h3><p>記事の主役の特設ページで、体験や商品を選びます。</p></article>
+            <article><h3>行動がスコアに</h3><p>来店、予約、応援購入などが、福岡と関わった証として積み上がります。</p></article>
+            <article><h3>関係が続いていく</h3><p>事業者からの活動報告や新しい特典が、次の体験につながります。</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head"><div><h2 class="section-title">ANNEXからのお知らせ<span class="en">UPDATES</span></h2></div></div>
+          <div class="updates">
+            <button class="update-card" data-detail="kisui"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg" alt="喜水丸"><div><time>2026.07.30</time><h3>喜水丸 今泉店の来店チェックインを開始</h3><p>記事で見たお店への訪問が応援スコアになります。</p></div></button>
+            <button class="update-card" data-detail="yadore"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/03/49863-8-a0ed29d6cc20f0402cca76c056ddd66f-1005x635-1.png" alt="YADO/Re"><div><time>2026.07.28</time><h3>YADO/Re 宿泊先行プランの受付を開始</h3><p>販売状況や新しいスコア特典を、活動報告でお知らせします。</p></div></button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="view" data-view="mall">
+      <header class="page-hero"><div class="container"><p class="eyebrow">EXPERIENCE MALL</p><h1>福岡の体験を見つける</h1><p>記事で知った店、ホテル、施設、プロジェクト。気になる主役のページから、あなたに合った関わり方を選べます。</p></div></header>
+      <section class="section"><div class="container"><div class="category-strip" data-category-strip><button class="is-active" data-filter="all">すべて</button><button data-filter="gourmet">グルメ</button><button data-filter="tour">観光・宿泊</button><button data-filter="city">まち・暮らし</button><button data-filter="business">ビジネス</button><button data-filter="group">えんグループ</button></div><div class="mall-grid" data-partner-grid></div></div></section>
+    </div>
+
+    <div class="view" data-view="market">
+      <header class="page-hero"><div class="container"><p class="eyebrow">FUKURIPA STORE</p><h1>応援したい体験を選ぶ</h1><p>掲載パートナーの商品、体験チケット、宿泊プランを応援購入。期間中の総応援額と参加人数を確かめながら、福岡の主役をみんなで後押しできます。</p></div></header>
+      <section class="section"><div class="container"><div class="market-grid" data-market-grid></div></div></section>
+    </div>
+
+    <div class="view" data-view="profile">
+      <header class="page-hero"><div class="container"><p class="eyebrow">MY ANNEX</p><h1>マイページ</h1><p>記事から始まった体験と、あなたが積み上げた福岡への応援を振り返れます。</p></div></header>
+      <section class="section"><div class="container profile-layout">
+        <article class="member-card"><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">ANNEX</span></div><p class="score-label">MEMBER</p><h2>福岡 めぐる さん</h2><p class="big-score"><span data-score>1,260</span><span> pt</span></p><p>称号：福岡まち歩き編集員</p><div class="member-card-footer"><p class="member-id">FLA-2026-0713<br>ANNEX DEMO PASS</p><div class="member-qr" aria-label="仮QRコード"><div class="member-qr-grid"></div></div></div></article>
+        <div class="profile-content">
+          <section><div class="benefit-summary"><div><h2 class="section-title" style="font-size:26px">スコア特典<span class="en">SCORE BENEFITS</span></h2><p>関わるほど、福岡をもっと楽しめる体験がひらきます。</p></div><strong>2 / 3 解放</strong></div><div class="benefit-grid">
+            <article class="benefit-card is-available"><span class="benefit-state">利用できます</span><h3>喜水丸限定<br>半熟たまご天</h3><p>店頭チェックイン時に会員証を提示すると利用できます。</p><strong>500pt達成特典</strong></article>
+            <article class="benefit-card is-available"><span class="benefit-state">利用できます</span><h3>フクリパ編集部の<br>限定まち歩き音声</h3><p>記事の舞台を編集部の案内と一緒に巡れる限定コンテンツ。</p><strong>1,200pt達成特典</strong></article>
+            <article class="benefit-card is-locked"><span class="benefit-state">あと740pt</span><h3>福岡アンバサダー<br>先行体験への招待</h3><p>新店舗・ホテル・イベントの先行体験へ抽選でご招待。</p><strong>2,000ptで解放</strong></article>
+          </div></section>
+          <section><h2 class="section-title" style="font-size:26px">応援の履歴<span class="en">SUPPORT HISTORY</span></h2><div class="history" data-history></div></section>
+        </div>
+      </div></section>
+    </div>
+
+    <div class="view" data-view="detail">
+      <section class="detail-hero" data-detail-hero><div class="detail-hero-content"><button class="back-button" data-route="mall">← 体験モールへ戻る</button><p class="eyebrow" style="margin-top:24px;color:#fff">FUKURIPA FEATURED PARTNER</p><h1 data-detail-name></h1><p data-detail-lead></p><div class="detail-badges" data-detail-badges></div></div></section>
+      <section class="section"><div class="container detail-layout">
+        <div class="detail-main">
+          <nav class="detail-nav"><button class="is-active" data-detail-tab="experience">体験する</button><button data-detail-tab="activity">活動報告</button><button data-detail-tab="shop">ストア</button><button data-detail-tab="articles">記事を読む</button></nav>
+          <div class="detail-panel is-active" data-detail-panel="experience"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">この場所でできること<span class="en">EXPERIENCES</span></h2></div></div><div class="experience-list" data-experiences></div></div>
+          <div class="detail-panel" data-detail-panel="activity"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">事業者からの活動報告<span class="en">WHAT'S NEW</span></h2></div><p class="section-copy">販売状況や新しいスコア特典を、公式情報としてお届けします。</p></div><div class="activity-feed" data-activity></div></div>
+          <div class="detail-panel" data-detail-panel="shop"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">この主役のストア<span class="en">STORE</span></h2></div></div><div class="market-grid" style="grid-template-columns:repeat(2,1fr)" data-detail-products></div></div>
+          <div class="detail-panel" data-detail-panel="articles"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">まずは記事から<span class="en">STORIES ON FUKURIPA</span></h2></div></div><div class="article-archive" data-detail-articles></div></div>
+        </div>
+        <aside class="detail-side"><div class="side-score"><h2>あなたとこの主役の応援スコア</h2><p class="score-value"><span data-partner-score>0</span><span> pt</span></p><button class="primary" data-earn="30" data-earn-label="お気に入り登録">お気に入りに追加 +30pt</button></div><div class="side-note"><strong>フクリパとのつながり</strong><p>このページはフクリパ掲載記事を入口にした体験ページです。最新の取材内容は、本家フクリパの記事で確認できます。</p></div><div class="side-sponsor"><p class="sponsor-label">ANNEX AD</p><h3>関連する体験広告</h3><p>この主役に関心のある読者へ、宿泊・イベント・商品を自然に提案できます。</p><a href="#market" data-route="market">広告枠のイメージを見る</a></div></aside>
+      </div></section>
+    </div>
+  </main>
+
+  <footer><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">ANNEX</span></div><nav><a href="https://fukuoka-leapup.jp/" target="_blank" rel="noopener">フクリパ本館</a><a href="#home" data-route="home">ANNEXトップ</a><a href="#mall" data-route="mall">体験を見つける</a><a href="#market" data-route="market">ストア</a><a href="#profile" data-route="profile">マイページ</a></nav><p>Concept mock for business discussion. © フクリパANNEX</p></footer>
+
+  <nav class="bottom-nav" aria-label="モバイルナビゲーション"><button data-route="home" class="is-active"><span>⌂</span>ホーム</button><button data-route="mall"><span>⌕</span>見つける</button><button data-route="market"><span>▣</span>ストア</button><button data-route="profile"><span>●</span>マイページ</button></nav>
+  <div class="toast" role="status" aria-live="polite"></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><h2 id="modalTitle">体験を確認</h2><p data-modal-copy></p><div class="modal-actions"><button class="ghost" data-modal-close>あとで</button><button class="primary" data-modal-confirm>体験する</button></div></div></div>
+
+  <script>
+    const partners = [
+      {id:'kisui',name:'博多の天ぷら喜水丸 今泉店',category:'gourmet',tag:'グルメ',status:'NEW',score:420,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg',lead:'揚げたての天ぷらと、博多名物の明太子・いか明太・高菜を心ゆくまで。',description:'来店チェックイン、限定定食、最新の活動報告を確認できます。',article:'https://fukuoka-leapup.jp/gourmet/202607.83006',articleTitle:'【福岡市】明太子の食べ放題も！「博多の天ぷら喜水丸 今泉店」が7月13日（月）オープン',articleDate:'2026.07.28',related:[{url:'https://fukuoka-leapup.jp/gourmet/202604.77838',title:'【福岡食べ放題3選】並んででも食べたい！海鮮・イカ明太・激安90品',date:'2026.04'}],badges:['記事掲載パートナー','西鉄福岡駅 徒歩2分','来店スコア対象']},
+      {id:'yadore',name:'YADO/Re（ヤドリ）',category:'group tour',tag:'観光・宿泊',status:'OPENING',score:310,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/03/49863-8-a0ed29d6cc20f0402cca76c056ddd66f-1005x635-1.png',lead:'薬院の日常に泊まる。「スマート＆グリーン」な新しい宿泊体験。',description:'宿泊先行案内、活動報告、薬院まち歩き企画。',article:'https://fukuoka-leapup.jp/biz/202603.75356',articleTitle:'えんホールディングスグループの新たな挑戦。YADO/Reに込めた思いと誕生秘話',articleDate:'2026.03',related:[{url:'https://fukuoka-leapup.jp/biz/202601.68641',title:'不動産×DX×メディアで福岡の魅力を発信。「ヤドリパ」がつくる新しいホテル体験',date:'2026.01.14'}],badges:['えんグループ','薬院','宿泊体験']},
+      {id:'trad',name:'ホテルトラッド博多',category:'group tour',tag:'観光・宿泊',status:'GROUP',score:520,image:'https://www.en-hd.jp/img/business/hotel/hotel_img02.png',lead:'福岡の別邸としてくつろぐ、伝統と上質が調和したホテル。',description:'宿泊、九州・福岡の朝食、館内チェックインが応援スコアに。',article:'https://fukuoka-leapup.jp/biz/202601.68641',articleTitle:'不動産×DX×メディアで福岡の魅力を発信。「ヤドリパ」がつくる新しいホテル体験',articleDate:'2026.01.14',badges:['えんグループ','博多・住吉','宿泊予約']},
+      {id:'ohashi',name:'OHASHI HILL',category:'group city',tag:'まちと暮らし',status:'EVENT',score:180,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/e9da6524f9b80a2b18386d1ace46e619-1500x788.jpg',lead:'ウェルネス・文化・地域の活動が交差する、大橋の複合施設。',description:'イベント参加、施設利用、地域企画でスコアが貯まります。',article:'https://fukuoka-leapup.jp/',articleTitle:'線香花火に屋台グルメ。「おおはしヒル夏まつり」で夏の思い出に特別な時間を',articleDate:'2026.07.28',badges:['えんグループ','大橋','イベント']},
+      {id:'canal',name:'キャナルシティ博多 イーストビル',category:'city business',tag:'まちと暮らし',status:'ARTICLE',score:90,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/samune-6.jpg',lead:'新しい店と体験が集まる、博多の都市回遊スポット。',description:'新店舗巡りや来館ミッションを想定した掲載先サンプルです。',article:'https://fukuoka-leapup.jp/',articleTitle:'キャナルシティ博多 イーストビルが9月4日（金）に再始動！全16店舗がオープン',articleDate:'2026.07.28',badges:['記事掲載先サンプル','博多','まち歩き']},
+      {id:'daimaru',name:'大丸福岡天神店',category:'gourmet city',tag:'グルメ',status:'ARTICLE',score:70,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/samune-7.jpg',lead:'催事と地域の食を楽しむ、天神の体験スポット。',description:'催事来場、対象商品購入、記事シェアを想定したサンプルです。',article:'https://fukuoka-leapup.jp/',articleTitle:'「夏の北海道展」が、大丸福岡天神店で8月5日（水）からスタート！',articleDate:'2026.07.26',badges:['記事掲載先サンプル','天神','ショッピング']}
+    ];
+    const products = [
+      {partner:'喜水丸 今泉店',name:'フクリパ限定 天ぷら定食体験券',price:'1,650円',point:'+165pt',raised:1287000,goal:1500000,supporters:412,end:'8月31日まで',image:partners[0].image},
+      {partner:'YADO/Re',name:'薬院まち歩き付き 宿泊先行プラン',price:'18,000円〜',point:'+500pt',raised:2340000,goal:3000000,supporters:96,end:'9月15日まで',image:partners[1].image},
+      {partner:'ホテルトラッド博多',name:'福岡食材の朝食ビュッフェ体験',price:'2,200円',point:'+220pt',raised:846000,goal:1000000,supporters:271,end:'8月20日まで',image:partners[2].image},
+      {partner:'OHASHI HILL',name:'地域イベント応援チケット',price:'1,000円',point:'+100pt',raised:672000,goal:800000,supporters:538,end:'8月10日まで',image:partners[3].image},
+      {partner:'喜水丸 今泉店',name:'来店記念 ANNEXデジタルバッジ',price:'300pt',point:'スコア交換',raised:384000,goal:500000,supporters:1280,end:'常時提供',image:partners[0].image},
+      {partner:'フクリパ編集部',name:'福岡の主役を訪ねる限定ツアー',price:'4,800円',point:'+480pt',raised:1152000,goal:1200000,supporters:240,end:'8月25日まで',image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/260225229.jpg'}
+    ];
+    let currentScore = 1260;
+    let currentPartner = partners[0];
+    let pendingEarn = null;
+    const histories = [
+      {date:'2026.07.28',title:'フクリパ記事を読了',source:'博多の天ぷら喜水丸 今泉店',point:10},
+      {date:'2026.07.26',title:'記事からANNEXへ訪問',source:'大丸福岡天神店',point:20},
+      {date:'2026.07.20',title:'宿泊体験',source:'ホテルトラッド博多',point:520},
+      {date:'2026.07.13',title:'フクリパANNEX会員登録',source:'フクリパ会員連携',point:100}
+    ];
+
+    const yen = n => Number(n).toLocaleString('ja-JP');
+    const icon = type => ({visit:'◎',reserve:'▣',activity:'●',read:'↗'}[type] || '＋');
+    function card(p) { return `<article class="partner-card" data-detail="${p.id}" data-category="${p.category}" tabindex="0"><figure><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="status-chip">${p.status}</span></figure><p class="card-tag">${p.tag}</p><h3>${p.name}</h3><p class="card-desc">${p.description}</p><div class="card-meta"><span>フクリパ ${p.articleDate}</span><strong>応援 ${yen(p.score)}pt</strong></div></article>`; }
+    function renderPartnerGrids(filter='all') { document.querySelectorAll('[data-partner-grid]').forEach(grid => { grid.innerHTML = partners.filter(p => filter==='all' || p.category.includes(filter)).map(card).join(''); }); }
+    function productCard(p) { const rate=Math.min(100,Math.round(p.raised/p.goal*100)); return `<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div><div><p class="card-tag">${p.partner}</p><span class="funding-status">応援購入 受付中</span><h3>${p.name}</h3><p class="funding-total">${yen(p.raised)}円<small>総応援額</small></p><div class="funding-progress" aria-label="目標達成率 ${rate}%"><span style="width:${rate}%"></span></div><div class="funding-meta"><span>${rate}%達成</span><span>${yen(p.supporters)}人が応援</span><span>${p.end}</span></div><div class="price"><span>${p.price}</span><small>${p.point}</small></div><button class="secondary" data-purchase="${p.name}">内容を見る・応援購入</button></div></article>`; }
+    function renderMarket() { document.querySelector('[data-market-grid]').innerHTML = products.map(productCard).join(''); }
+    function renderHistory() { document.querySelector('[data-history]').innerHTML = histories.map(h => `<div class="history-row"><div><p><strong>${h.title}</strong></p><small>${h.date}・${h.source}</small></div><strong>+${h.point}pt</strong></div>`).join(''); }
+    function syncScore() { document.querySelectorAll('[data-score]').forEach(el => el.textContent = yen(currentScore)); const remaining=Math.max(0,2000-currentScore); document.querySelectorAll('[data-remaining]').forEach(el=>el.textContent=yen(remaining)); document.querySelectorAll('[data-progress]').forEach(el=>el.style.width=`${Math.min(100,currentScore/2000*100)}%`); }
+    function route(name) { document.querySelectorAll('.view').forEach(v => v.classList.toggle('is-active',v.dataset.view===name)); document.querySelectorAll('[data-route]').forEach(b => b.classList.toggle('is-active',b.dataset.route===name)); window.scrollTo({top:0,behavior:'smooth'}); if(history.replaceState) history.replaceState(null,'',`#${name}`); }
+    function showToast(message) { const t=document.querySelector('.toast'); t.textContent=message; t.classList.add('is-visible'); clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>t.classList.remove('is-visible'),2400); }
+    function openEarn(points,label) { pendingEarn={points:Number(points),label}; document.querySelector('[data-modal-copy]').textContent=`「${label}」をデモ体験します。完了すると応援スコア +${points}pt が反映されます。`; document.querySelector('.modal').classList.add('is-open'); }
+    function closeModal(){ document.querySelector('.modal').classList.remove('is-open'); }
+
+    function experiences(p) {
+      const base = p.id==='kisui' ? [
+        {type:'visit',title:'今泉店でチェックイン',copy:'店頭で会員証を提示。記事を読んで訪れた体験を記録します。',point:120,action:'チェックインする'},
+        {type:'reserve',title:'フクリパ限定定食を予約',copy:'上天ぷら定食と半熟たまご天を楽しむANNEX限定体験。',point:200,action:'体験を予約する'},
+        {type:'activity',title:'喜水丸の活動報告を見る',copy:'販売状況や新しいスコア特典など、店舗からの最新情報を確認できます。',action:'活動報告を見る',tab:'activity'}
+      ] : [
+        {type:'visit',title:`${p.name}を訪れる`,copy:'現地チェックインで、記事のその先の体験を記録します。',point:120,action:'チェックインする'},
+        {type:'reserve',title:'限定体験を予約する',copy:'ANNEX会員向けの体験・利用プランです。',point:200,action:'体験を予約する'},
+        {type:'activity',title:'最新の活動報告を見る',copy:'販売状況や提供中のスコア特典など、事業者からの新着情報です。',action:'活動報告を見る',tab:'activity'}
+      ];
+      return base.map(x=>`<article class="experience-card"><div class="experience-icon">${icon(x.type)}</div><div><h3>${x.title}</h3><p>${x.copy}</p></div><div>${x.point?`<div class="point-label">+${x.point}pt</div>`:''}<button class="secondary" ${x.tab?`data-open-tab="${x.tab}"`:`data-earn="${x.point}" data-earn-label="${x.title}"`}>${x.action}</button></div></article>`).join('');
+    }
+    const activityLikes = {};
+    function activities(p) {
+      const storeProduct=products.find(x=>x.partner.includes(p.name.split('（')[0].split(' ')[0]))||products[0];
+      const posts = p.id==='kisui' ? [
+        {label:'販売状況',date:'2026.07.31',title:'限定天ぷら定食の応援購入が80%を超えました',copy:`現在${yen(storeProduct.supporters)}人の方に応援いただき、総応援額は${yen(storeProduct.raised)}円になりました。ありがとうございます。`,likes:86},
+        {label:'スコア特典',date:'2026.07.29',title:'500pt特典「半熟たまご天」を追加しました',copy:'喜水丸への応援スコアが500ptに到達した方は、店頭チェックイン時に利用できます。',likes:124},
+        {label:'お知らせ',date:'2026.07.27',title:'週末も揚げたてでお待ちしています',copy:'フクリパの記事で紹介された明太子・いか明太・高菜もご用意しています。',likes:57}
+      ] : [
+        {label:'販売状況',date:'2026.07.31',title:`${storeProduct.name}の応援状況`,copy:`${yen(storeProduct.supporters)}人から、総額${yen(storeProduct.raised)}円の応援が集まっています。`,likes:48},
+        {label:'スコア特典',date:'2026.07.29',title:'ANNEX会員向けの新しい特典を準備中です',copy:'体験の先行案内や限定プランなど、応援スコアに応じた特典を順次追加します。',likes:72},
+        {label:'お知らせ',date:'2026.07.26',title:`${p.name}からのお知らせ`,copy:'フクリパの記事の続きを体験できる企画をお届けします。',likes:35}
+      ];
+      return posts.map((post,index)=>{ const key=`${p.id}-${index}`; const liked=activityLikes[key]; return `<article class="activity-post"><div class="activity-head"><div><span class="activity-label">${post.label}</span><time>${post.date}</time><h3>${post.title}</h3></div><button class="like-button ${liked?'is-liked':''}" data-like="${key}" data-like-base="${post.likes}" aria-pressed="${liked?'true':'false'}">♡ <span>${post.likes+(liked?1:0)}</span></button></div><p>${post.copy}</p></article>`; }).join('');
+    }
+    function articleCTA(p,index=0) { return `<a class="article-cta" href="${p.article}" target="_blank" rel="noopener"><img src="${p.image}" alt="${p.articleTitle}"><div><p class="source">本家フクリパ｜${p.articleDate}${index?'・過去の特集':''}</p><h3>${p.articleTitle}</h3><p class="read">この記事をフクリパで読む →</p></div></a>`; }
+    function openDetail(id) {
+      currentPartner=partners.find(p=>p.id===id)||partners[0];
+      const hero=document.querySelector('[data-detail-hero]'); hero.style.setProperty('--detail-image',`url("${currentPartner.image}")`);
+      document.querySelector('[data-detail-name]').textContent=currentPartner.name;
+      document.querySelector('[data-detail-lead]').textContent=currentPartner.lead;
+      document.querySelector('[data-detail-badges]').innerHTML=currentPartner.badges.map(x=>`<span>${x}</span>`).join('');
+      document.querySelector('[data-partner-score]').textContent=yen(currentPartner.score);
+      document.querySelector('[data-experiences]').innerHTML=experiences(currentPartner);
+      document.querySelector('[data-activity]').innerHTML=activities(currentPartner);
+      const localProducts=products.filter(x=>x.partner.includes(currentPartner.name.split('（')[0].split(' ')[0])).slice(0,2); const fallback=products.slice(0,2);
+      document.querySelector('[data-detail-products]').innerHTML=(localProducts.length?localProducts:fallback).map(productCard).join('');
+      const articleHistory=(currentPartner.related||[]).map(item=>articleCTA({...currentPartner,article:item.url,articleTitle:item.title,articleDate:item.date},1)).join('');
+      document.querySelector('[data-detail-articles]').innerHTML=articleCTA(currentPartner)+articleHistory;
+      document.querySelectorAll('[data-detail-tab]').forEach((b,i)=>b.classList.toggle('is-active',i===0)); document.querySelectorAll('[data-detail-panel]').forEach((p,i)=>p.classList.toggle('is-active',i===0)); route('detail');
+    }
+    function switchDetailTab(tab) { document.querySelectorAll('[data-detail-tab]').forEach(b=>b.classList.toggle('is-active',b.dataset.detailTab===tab)); document.querySelectorAll('[data-detail-panel]').forEach(p=>p.classList.toggle('is-active',p.dataset.detailPanel===tab)); }
+
+    document.addEventListener('click',e=>{
+      const routeButton=e.target.closest('[data-route]'); if(routeButton){e.preventDefault();route(routeButton.dataset.route);return;}
+      const detail=e.target.closest('[data-detail]'); if(detail){openDetail(detail.dataset.detail);return;}
+      const filter=e.target.closest('[data-filter]'); if(filter){const value=filter.dataset.filter;document.querySelectorAll('[data-category-strip]').forEach(strip=>strip.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('is-active',b.dataset.filter===value)));renderPartnerGrids(value);return;}
+      const tab=e.target.closest('[data-detail-tab]'); if(tab){switchDetailTab(tab.dataset.detailTab);return;}
+      const openTab=e.target.closest('[data-open-tab]'); if(openTab){switchDetailTab(openTab.dataset.openTab);document.querySelector('.detail-nav').scrollIntoView({behavior:'smooth',block:'start'});return;}
+      const like=e.target.closest('[data-like]'); if(like){const key=like.dataset.like;activityLikes[key]=!activityLikes[key];like.classList.toggle('is-liked',activityLikes[key]);like.setAttribute('aria-pressed',activityLikes[key]?'true':'false');like.querySelector('span').textContent=Number(like.dataset.likeBase)+(activityLikes[key]?1:0);showToast(activityLikes[key]?'活動報告にいいねしました':'いいねを取り消しました');return;}
+      const earn=e.target.closest('[data-earn]'); if(earn){openEarn(earn.dataset.earn,earn.dataset.earnLabel);return;}
+      const purchase=e.target.closest('[data-purchase]'); if(purchase){openEarn(150,`${purchase.dataset.purchase}の応援購入`);return;}
+      if(e.target.closest('[data-modal-close]')) closeModal();
+      if(e.target.closest('[data-modal-confirm]')&&pendingEarn){currentScore+=pendingEarn.points;histories.unshift({date:'2026.07.30',title:pendingEarn.label,source:currentPartner.name,point:pendingEarn.points});syncScore();renderHistory();closeModal();showToast(`${pendingEarn.label} +${pendingEarn.points}pt を反映しました`);pendingEarn=null;}
+    });
+    document.addEventListener('keydown',e=>{const card=e.target.closest('.partner-card');if(card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openDetail(card.dataset.detail);}if(e.key==='Escape')closeModal();});
+    renderPartnerGrids(); renderMarket(); renderHistory(); syncScore();
+    const initial=location.hash.replace('#',''); if(['home','mall','market','profile'].includes(initial)) route(initial);
+  </script>
+</body>
+</html>
