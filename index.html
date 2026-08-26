@@ -395,6 +395,21 @@
     .article-cta .source { margin: 0 0 6px; color: var(--cyan-dark); font-size: 11px; font-weight: 900; letter-spacing: .12em; }
     .article-cta h3 { margin: 0; font-size: 17px; }
     .article-cta .read { margin: 12px 0 0; font-weight: 800; }
+    .article-newsletter {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-top: 22px;
+      padding: 22px 24px;
+      border: 1px solid #bbb;
+      border-left: 5px solid var(--yellow);
+      background: #fffdf3;
+    }
+    .article-newsletter .eyebrow { margin-bottom: 7px; color: #776000; font-size: 10px; }
+    .article-newsletter h3 { margin: 0 0 7px; font-size: 18px; }
+    .article-newsletter p { margin: 0; color: #666; font-size: 13px; }
+    .article-newsletter .primary { display: inline-grid; place-items: center; text-decoration: none; white-space: nowrap; }
     .detail-side { position: sticky; top: 110px; display: grid; gap: 18px; }
     .side-score { border: 1px solid #bbb; padding: 22px; }
     .side-score h2 { margin: 0; font-size: 15px; }
@@ -490,6 +505,7 @@
       .experience-card > div:last-child { grid-column: 2; }
       .article-cta { grid-template-columns: 1fr; }
       .article-cta img { min-height: 150px; }
+      .article-newsletter { grid-template-columns: 1fr; }
       .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: repeat(3,1fr); background: #fff; border-top: 1px solid #ccc; box-shadow: 0 -5px 20px rgba(0,0,0,.08); }
       .bottom-nav button { min-height: 64px; border: 0; background: #fff; font-size: 10px; font-weight: 800; cursor: pointer; }
       .bottom-nav button span { display: block; font-size: 21px; line-height: 1.1; }
@@ -624,7 +640,7 @@
           <nav class="detail-nav" style="grid-template-columns:repeat(3,1fr)"><button class="is-active" data-detail-tab="experience">体験する</button><button data-detail-tab="activity">活動報告</button><button data-detail-tab="articles">記事を読む</button></nav>
           <div class="detail-panel is-active" data-detail-panel="experience"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">この場所でできること<span class="en">EXPERIENCES</span></h2></div></div><div class="experience-list" data-experiences></div></div>
           <div class="detail-panel" data-detail-panel="activity"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">事業者からの活動報告<span class="en">WHAT'S NEW</span></h2></div><p class="section-copy">施設・サービスの情報や新しいスコア特典を、公式情報としてお届けします。</p></div><div class="activity-feed" data-activity></div></div>
-          <div class="detail-panel" data-detail-panel="articles"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">まずは記事から<span class="en">STORIES ON FUKURIPA</span></h2></div></div><div class="article-archive" data-detail-articles></div></div>
+          <div class="detail-panel" data-detail-panel="articles"><div class="section-head"><div><h2 class="section-title" style="font-size:27px">福岡の今を、もっと知る<span class="en">STORIES ON FUKURIPA</span></h2></div><p class="section-copy">この場所を知るきっかけになった記事と、あわせて読みたいフクリパの特集です。</p></div><div class="article-archive" data-detail-articles></div><aside class="article-newsletter" aria-label="フクリパメルマガ登録"><div><p class="eyebrow">FUKURIPA MAGAZINE</p><h3>フクリパの注目記事を、メールで受け取る</h3><p>福岡の今がわかる記事や、ANNEXでの次の体験につながる情報をお届けします。</p></div><a class="primary" href="https://member.fukuoka-leapup.jp/member/email/index" target="_blank" rel="noopener noreferrer">無料でメルマガ登録</a></aside></div>
         </div>
         <aside class="detail-side"><div class="side-score"><h2>あなたとこの主役の累計スコア</h2><p class="score-value"><span data-partner-score>0</span><span> pt</span></p><p class="score-label">記事読了、来店、宿泊・施設利用を確認したときに加算されます。</p></div><div class="side-note"><strong>フクリパとのつながり</strong><p>このページはフクリパ掲載記事を入口にした体験ページです。最新の取材内容は、本家フクリパの記事で確認できます。</p></div></aside>
       </div></section>
