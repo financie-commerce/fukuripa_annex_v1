@@ -124,6 +124,7 @@
       margin-bottom: 24px;
     }
     .section-title { margin: 0; font-size: clamp(24px,3vw,38px); line-height: 1.25; }
+    .section-title.flow-title { font-size: clamp(20px,2.55vw,34px); letter-spacing: -.03em; white-space: nowrap; }
     .section-title .en { display: block; margin-top: 4px; color: #999; font-family: Arial,sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .16em; }
     .section-copy { margin: 0; color: #666; max-width: 540px; }
     .text-link { border: 0; background: none; cursor: pointer; font-weight: 800; border-bottom: 2px solid var(--cyan); padding: 3px 0; }
@@ -528,7 +529,7 @@
         <button data-route="profile">マイページ</button>
       </nav>
       <div class="header-actions">
-        <button class="score-pill" data-route="profile"><small>応援スコア</small><strong data-score>1,260</strong> pt</button>
+        <button class="score-pill" data-route="profile"><small>フクリパスコア</small><strong data-score>1,260</strong> pt</button>
         <button class="member-button" data-route="profile">会員証</button>
       </div>
     </div>
@@ -552,9 +553,9 @@
       </section>
 
       <div class="container">
-        <section class="score-board" aria-label="応援スコア">
+        <section class="score-board" aria-label="フクリパスコア">
           <div>
-            <p class="score-label">あなたの応援スコア</p>
+            <p class="score-label">あなたのフクリパスコア</p>
             <p class="score-value"><strong data-score>1,260</strong><span> pt</span></p>
             <p class="score-label">称号：福岡まち歩き編集員</p>
           </div>
@@ -591,7 +592,7 @@
 
       <section class="section soft">
         <div class="container">
-          <div class="section-head"><div><h2 class="section-title">福岡を知る。訪ねる。関わりが残る。<span class="en">HOW ANNEX WORKS</span></h2></div><p class="section-copy">ANNEXと本館、どちらからでも。福岡との出会いと体験が、応援スコアとして積み上がります。</p></div>
+          <div class="section-head"><div><h2 class="section-title flow-title">福岡を知る。訪ねる。関わる。<span class="en">HOW ANNEX WORKS</span></h2></div><p class="section-copy">ANNEXと本館、どちらからでも。<br>福岡との出会いと体験がスコアとして積み上がります。</p></div>
           <div class="journey">
             <article data-label="ANNEX"><h3>ANNEXで見つける</h3><p>店、ホテル、施設から、気になる福岡を見つけます。</p></article>
             <article data-label="FUKURIPA"><h3>本館で深く知る</h3><p>記事で背景や物語に触れ、行ってみたい理由を見つけます。</p></article>
@@ -605,7 +606,7 @@
         <div class="container">
           <div class="section-head"><div><h2 class="section-title">フクリパANNEXからのお知らせ<span class="en">UPDATES</span></h2></div></div>
           <div class="updates">
-            <button class="update-card" data-detail="kisui"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg" alt="喜水丸"><div><time>2026.07.30</time><h3>喜水丸 今泉店の来店チェックインを開始</h3><p>記事で見たお店への訪問が応援スコアになります。</p></div></button>
+            <button class="update-card" data-detail="kisui"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg" alt="喜水丸"><div><time>2026.07.30</time><h3>喜水丸 今泉店の来店チェックインを開始</h3><p>記事で見たお店への訪問がフクリパスコアになります。</p></div></button>
             <button class="update-card" data-detail="yadore"><img src="https://fukuoka-leapup.jp/app/wp-content/uploads/2026/03/49863-8-a0ed29d6cc20f0402cca76c056ddd66f-1005x635-1.png" alt="YADO/Re"><div><time>2026.07.28</time><h3>YADO/Re 会員向け宿泊情報を公開</h3><p>施設利用や新しいスコア特典を、活動報告でお知らせします。</p></div></button>
           </div>
         </div>
@@ -622,7 +623,7 @@
       <section class="section"><div class="container profile-layout">
         <article class="member-card"><div class="brand"><img src="https://fukuoka-leapup.jp/app/wp-content/themes/flu2023/assets/images/logo.svg" alt="フクリパ"><span class="annex-mark">ANNEX</span></div><p class="score-label">ANNEX PASS</p><h2>福岡 めぐる さん</h2><p class="big-score"><span data-score>1,260</span><span> pt</span></p><p data-member-rank>ランク2｜称号：福岡まち歩き編集員</p><div class="member-card-footer"><p class="member-id">FLA-2026-0713<br>ANNEX DEMO PASS</p><div class="member-qr" aria-label="仮QRコード"><div class="member-qr-grid"></div></div></div></article>
         <div class="profile-content">
-          <aside class="fukuripa-invite" aria-label="フクリパ会員のご案内"><div><p class="eyebrow">FUKURIPA MEMBER BENEFIT</p><h2>フクリパ会員になると、記事体験がもっと深まります</h2><p>会員向けメルマガから対象記事を読むと、通常より多くの応援スコアを受け取れます。</p><small>通常読了 +20pt｜メルマガ経由 最大 +80pt　※対象記事・獲得条件はメルマガでお知らせします。</small></div><a class="primary" href="https://member.fukuoka-leapup.jp/member/email/index" target="_blank" rel="noopener noreferrer">フクリパ無料会員になる</a></aside>
+          <aside class="fukuripa-invite" aria-label="フクリパ会員のご案内"><div><p class="eyebrow">FUKURIPA MEMBER BENEFIT</p><h2>フクリパ会員になると、記事体験がもっと深まります</h2><p>会員向けメルマガから対象記事を読むと、通常より多くのフクリパスコアを受け取れます。</p><small>通常読了 +20pt｜メルマガ経由 最大 +80pt　※対象記事・獲得条件はメルマガでお知らせします。</small></div><a class="primary" href="https://member.fukuoka-leapup.jp/member/email/index" target="_blank" rel="noopener noreferrer">フクリパ無料会員になる</a></aside>
           <section><div class="benefit-summary"><div><h2 class="section-title" style="font-size:26px">ランク特典<span class="en">RANK BENEFITS</span></h2><p>累計スコアでランクが上がります。スコアは消費されません。</p></div><strong data-current-rank>現在：ランク2</strong></div><div class="benefit-grid">
             <article class="benefit-card"><span class="benefit-state">ランク1</span><h3>福岡ビギナー</h3><p>記事読了・来店・施設利用の履歴をマイページで確認できます。</p><strong>称号・バッジ付与</strong></article>
             <article class="benefit-card is-available" data-rank-two><span class="benefit-state" data-rank-two-state>現在のランク</span><h3>福岡まち歩き<br>編集員</h3><p>フクリパANNEXの会員向け企画や限定情報をご案内します。</p><strong>累計1,200pt到達</strong></article>
@@ -661,7 +662,7 @@
     const partners = [
       {id:'kisui',name:'博多の天ぷら喜水丸 今泉店',category:'gourmet',tag:'グルメ',status:'NEW',score:420,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/a98b1120712ae2558c294773114e59b3.jpg',lead:'揚げたての天ぷらと、博多名物の明太子・いか明太・高菜を心ゆくまで。',description:'記事読了、来店チェックイン、最新の活動報告を確認できます。',article:'https://fukuoka-leapup.jp/gourmet/202607.83006',articleTitle:'【福岡市】明太子の食べ放題も！「博多の天ぷら喜水丸 今泉店」が7月13日（月）オープン',articleDate:'2026.07.28',related:[{url:'https://fukuoka-leapup.jp/gourmet/202604.77838',title:'【福岡食べ放題3選】並んででも食べたい！海鮮・イカ明太・激安90品',date:'2026.04'}],badges:['記事掲載パートナー','西鉄福岡駅 徒歩2分','来店スコア対象']},
       {id:'yadore',name:'YADO/Re（ヤドリ）',category:'group tour',tag:'観光・宿泊',status:'OPENING',score:310,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/03/49863-8-a0ed29d6cc20f0402cca76c056ddd66f-1005x635-1.png',lead:'薬院の日常に泊まる。「スマート＆グリーン」な新しい宿泊体験。',description:'宿泊情報、活動報告、薬院まち歩き企画。',article:'https://fukuoka-leapup.jp/biz/202603.75356',articleTitle:'えんホールディングスグループの新たな挑戦。YADO/Reに込めた思いと誕生秘話',articleDate:'2026.03',related:[{url:'https://fukuoka-leapup.jp/biz/202601.68641',title:'不動産×DX×メディアで福岡の魅力を発信。「ヤドリパ」がつくる新しいホテル体験',date:'2026.01.14'}],badges:['えんグループ','薬院','宿泊体験']},
-      {id:'trad',name:'ホテルトラッド博多',category:'group tour',tag:'観光・宿泊',status:'GROUP',score:520,image:'https://www.en-hd.jp/img/business/hotel/hotel_img02.png',lead:'福岡の別邸としてくつろぐ、伝統と上質が調和したホテル。',description:'宿泊、九州・福岡の朝食、館内チェックインが応援スコアに。',article:'https://fukuoka-leapup.jp/biz/202601.68641',articleTitle:'不動産×DX×メディアで福岡の魅力を発信。「ヤドリパ」がつくる新しいホテル体験',articleDate:'2026.01.14',badges:['えんグループ','博多・住吉','宿泊予約']},
+      {id:'trad',name:'ホテルトラッド博多',category:'group tour',tag:'観光・宿泊',status:'GROUP',score:520,image:'https://www.en-hd.jp/img/business/hotel/hotel_img02.png',lead:'福岡の別邸としてくつろぐ、伝統と上質が調和したホテル。',description:'宿泊、九州・福岡の朝食、館内チェックインがフクリパスコアに。',article:'https://fukuoka-leapup.jp/biz/202601.68641',articleTitle:'不動産×DX×メディアで福岡の魅力を発信。「ヤドリパ」がつくる新しいホテル体験',articleDate:'2026.01.14',badges:['えんグループ','博多・住吉','宿泊予約']},
       {id:'ohashi',name:'OHASHI HILL',category:'group city',tag:'まちと暮らし',status:'EVENT',score:180,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/e9da6524f9b80a2b18386d1ace46e619-1500x788.jpg',lead:'ウェルネス・文化・地域の活動が交差する、大橋の複合施設。',description:'イベント参加、施設利用、地域企画でスコアが貯まります。',article:'https://fukuoka-leapup.jp/',articleTitle:'線香花火に屋台グルメ。「おおはしヒル夏まつり」で夏の思い出に特別な時間を',articleDate:'2026.07.28',badges:['えんグループ','大橋','イベント']},
       {id:'canal',name:'キャナルシティ博多 イーストビル',category:'city business',tag:'まちと暮らし',status:'ARTICLE',score:90,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/samune-6.jpg',lead:'新しい店と体験が集まる、博多の都市回遊スポット。',description:'新店舗巡りや来館チェックインを想定した掲載先サンプルです。',article:'https://fukuoka-leapup.jp/',articleTitle:'キャナルシティ博多 イーストビルが9月4日（金）に再始動！全16店舗がオープン',articleDate:'2026.07.28',badges:['記事掲載先サンプル','博多','まち歩き']},
       {id:'daimaru',name:'大丸福岡天神店',category:'gourmet city',tag:'グルメ',status:'ARTICLE',score:70,image:'https://fukuoka-leapup.jp/app/wp-content/uploads/2026/07/samune-7.jpg',lead:'催事と地域の食を楽しむ、天神の体験スポット。',description:'催事来場や施設利用を想定した掲載先サンプルです。',article:'https://fukuoka-leapup.jp/',articleTitle:'「夏の北海道展」が、大丸福岡天神店で8月5日（水）からスタート！',articleDate:'2026.07.26',badges:['記事掲載先サンプル','天神','ショッピング']}
@@ -679,7 +680,7 @@
 
     const yen = n => Number(n).toLocaleString('ja-JP');
     const icon = type => ({visit:'◎',reserve:'▣',activity:'●',read:'↗'}[type] || '＋');
-    function card(p) { return `<article class="partner-card" data-detail="${p.id}" data-category="${p.category}" tabindex="0"><figure><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="status-chip">${p.status}</span></figure><p class="card-tag">${p.tag}</p><h3>${p.name}</h3><p class="card-desc">${p.description}</p><div class="card-meta"><span>フクリパ ${p.articleDate}</span><strong>応援 ${yen(p.score)}pt</strong></div></article>`; }
+    function card(p) { return `<article class="partner-card" data-detail="${p.id}" data-category="${p.category}" tabindex="0"><figure><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="status-chip">${p.status}</span></figure><p class="card-tag">${p.tag}</p><h3>${p.name}</h3><p class="card-desc">${p.description}</p><div class="card-meta"><span>フクリパ ${p.articleDate}</span><strong>スコア ${yen(p.score)}pt</strong></div></article>`; }
     function renderPartnerGrids(filter='all') { document.querySelectorAll('[data-partner-grid]').forEach(grid => { grid.innerHTML = partners.filter(p => filter==='all' || p.category.includes(filter)).map(card).join(''); }); }
     function renderHistory() { document.querySelector('[data-history]').innerHTML = histories.map(h => `<div class="history-row"><div><p><strong>${h.title}</strong></p><small>${h.date}・${h.source}</small></div><strong>+${h.point}pt</strong></div>`).join(''); }
     function syncScore() {
@@ -701,7 +702,7 @@
     }
     function route(name) { document.querySelectorAll('.view').forEach(v => v.classList.toggle('is-active',v.dataset.view===name)); document.querySelectorAll('[data-route]').forEach(b => b.classList.toggle('is-active',b.dataset.route===name)); window.scrollTo({top:0,behavior:'smooth'}); if(history.replaceState) history.replaceState(null,'',`#${name}`); }
     function showToast(message) { const t=document.querySelector('.toast'); t.textContent=message; t.classList.add('is-visible'); clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>t.classList.remove('is-visible'),2400); }
-    function openEarn(points,label) { pendingEarn={points:Number(points),label}; document.querySelector('[data-modal-copy]').textContent=`「${label}」をデモ体験します。完了すると応援スコア +${points}pt が反映されます。`; document.querySelector('.modal').classList.add('is-open'); }
+    function openEarn(points,label) { pendingEarn={points:Number(points),label}; document.querySelector('[data-modal-copy]').textContent=`「${label}」をデモ体験します。完了するとフクリパスコア +${points}pt が反映されます。`; document.querySelector('.modal').classList.add('is-open'); }
     function closeModal(){ document.querySelector('.modal').classList.remove('is-open'); }
 
     function experiences(p) {
@@ -723,11 +724,11 @@
     const activityLikes = {};
     function activities(p) {
       const posts = p.id==='kisui' ? [
-        {label:'店舗情報',date:'2026.07.31',title:'フクリパ会員向け来店企画を実施中です',copy:'記事を読んで来店した体験が、応援スコアとして記録されます。',likes:86},
-        {label:'店舗情報',date:'2026.07.29',title:'来店チェックインを開始しました',copy:'店頭のQRコードを読み取ると、来店確認後に応援スコアが加算されます。',likes:124},
+        {label:'店舗情報',date:'2026.07.31',title:'フクリパ会員向け来店企画を実施中です',copy:'記事を読んで来店した体験が、フクリパスコアとして記録されます。',likes:86},
+        {label:'店舗情報',date:'2026.07.29',title:'来店チェックインを開始しました',copy:'店頭のQRコードを読み取ると、来店確認後にフクリパスコアが加算されます。',likes:124},
         {label:'お知らせ',date:'2026.07.27',title:'週末も揚げたてでお待ちしています',copy:'フクリパの記事で紹介された明太子・いか明太・高菜もご用意しています。',likes:57}
       ] : [
-        {label:'利用案内',date:'2026.07.31',title:`${p.name}の会員向け体験をご案内しています`,copy:'施設・サービスの利用確認後、応援スコアが加算されます。',likes:48},
+        {label:'利用案内',date:'2026.07.31',title:`${p.name}の会員向け体験をご案内しています`,copy:'施設・サービスの利用確認後、フクリパスコアが加算されます。',likes:48},
         {label:'お知らせ',date:'2026.07.29',title:'フクリパANNEX会員向け企画を準備中です',copy:'体験の案内や新しいスコア特典を、活動報告で順次お届けします。',likes:72},
         {label:'お知らせ',date:'2026.07.26',title:`${p.name}からのお知らせ`,copy:'フクリパの記事の続きを体験できる企画をお届けします。',likes:35}
       ];
